@@ -90,10 +90,13 @@ docker logs -f                        core-prometheus-c
 ```
 
 - Test connection.
+
 ```
 curl -vkL https://micro-local.net/prometheus/api/v1/query?query=up
 curl -vkL https://micro-local.net/prometheus/api/v1/metadata
 ```
+
+- Check [`grafana`](https://github.com/ahmettoguz/core-graphana) repository to integrate gaphana to visualize prometheus data.
 
 <br/>
 
