@@ -1,0 +1,20 @@
+####################################### Services
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: core-prometheus-c
+    volumes:
+      - ./mount:/prometheus
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    networks:
+      - network-core
+    # restart: always
+    ports:
+      - 9090:9090
+
+####################################### Networks
+networks:
+  network-core:
+    external: true
