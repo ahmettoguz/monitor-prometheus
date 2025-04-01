@@ -73,6 +73,12 @@ cd core
 git clone https://github.com/ahmettoguz/core-prometheus
 ```
 
+- Create configuration file `./config/prometheus.yml` with reference to `./config/prometheus.traefik.yml`.
+
+```
+cp ./config/prometheus.traefik.yml ./config/prometheus.yml
+```
+
 - Create `network-core` network if not exists.
 
 ```
