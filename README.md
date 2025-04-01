@@ -89,6 +89,12 @@ docker compose -p core up -d          prometheus
 docker logs -f                        core-prometheus-c
 ```
 
+- Test connection.
+```
+curl -vkL https://micro-local.net/prometheus/api/v1/query?query=up
+curl -vkL https://micro-local.net/prometheus/api/v1/metadata
+```
+
 <br/>
 
 <h2 id="contributors">👥 Contributors</h2>
