@@ -73,6 +73,7 @@ cd monitor
 
 ```
 git clone https://github.com/ahmettoguz/monitor-prometheus
+cd monitor-prometheus
 ```
 
 - Create configuration file `./config/prometheus.yml` with reference to one of the following file according to needs:
@@ -86,13 +87,20 @@ git clone https://github.com/ahmettoguz/monitor-prometheus
 cp ./config/prometheus.all.yml ./config/prometheus.yml
 ```
 
+- Create `mount` directory and change file permissions.
+
+```
+mkdir mount
+chown -R 65534:65534 ./mount
+```
+
 - Create `network-monitor` network if not exists.
 
 ```
 docker network create network-monitor
 ```
 
-- Run Container.
+- Run container.
 
 ```
 docker stop                             monitor-prometheus-c
