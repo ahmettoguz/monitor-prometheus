@@ -22,7 +22,7 @@
 
 <h2 id="intro">📌 About Project</h2>
 
-This project simplifies the deployment of Prometheus with pre-configured settings, including persistent data storage and integration with Traefik metrics for monitoring reverse proxy performance, all managed via Docker Compose.
+This project simplifies the deployment of Prometheus with pre-configured settings, including persistent data storage and integration with Traefik metrics for monitoring reverse proxy performance, cAdvisor, and node-exporter to monitor both containerized and system-level performance, all managed via Docker Compose.
 
 <br/>
 
@@ -49,6 +49,8 @@ This project simplifies the deployment of Prometheus with pre-configured setting
 - **Docker Compose Deployment:** Simplifies deployment with Docker Compose configuration, enabling easy setup and service orchestration without complex commands.
 - **Customizable Configuration:** Easily modify Prometheus configuration via bind mounts to adjust settings such as scrape intervals, alert rules, and more.
 - **Traefik Metrics Integration:** Prometheus can be configured to scrape metrics provided by Traefik, enabling monitoring of your reverse proxy's performance, request counts, error rates, and other important statistics. This helps to get a comprehensive view of your application's traffic and routing.
+- **cAdvisor Integration:** Integrates with cAdvisor to scrape container metrics and track resource usage (CPU, memory, network, disk) across running containers.
+- **Node-Exporter Integration:** Scrapes node metrics, including system-level statistics like CPU usage, memory consumption, disk I/O, and network statistics for overall server health monitoring.
 
 <br/>
 
@@ -73,10 +75,15 @@ cd core
 git clone https://github.com/ahmettoguz/core-prometheus
 ```
 
-- Create configuration file `./config/prometheus.yml` with reference to `./config/prometheus.traefik.yml`.
+- Create configuration file `./config/prometheus.yml` with reference to one of the following file according to needs:
+
+- `./config/prometheus.all.yml`
+- `./config/prometheus.cadvisor.yml`
+- `./config/prometheus.node-exporter.yml`
+- `./config/prometheus.traefik.yml`
 
 ```
-cp ./config/prometheus.traefik.yml ./config/prometheus.yml
+cp ./config/prometheus.all.yml ./config/prometheus.yml
 ```
 
 - Create `network-core` network if not exists.
