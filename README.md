@@ -1,4 +1,4 @@
-<h1 id="top" align="center">Core Prometheus</h1>
+<h1 id="top" align="center">Monitor Prometheus</h1>
 
 <br>
 
@@ -56,23 +56,23 @@ This project simplifies the deployment of Prometheus with pre-configured setting
 
 <h2 id="releases">🚢 Releases</h2>
 
-&nbsp; [![.](https://img.shields.io/badge/1.0.0-233838?style=flat&label=version&labelColor=111727&color=1181A1)](https://github.com/ahmettoguz/core-prometheus/tree/v1.0.0)
+&nbsp; [![.](https://img.shields.io/badge/1.0.0-233838?style=flat&label=version&labelColor=111727&color=1181A1)](https://github.com/ahmettoguz/monitor-prometheus/tree/v1.0.0)
 
 <br/>
 
 <h2 id="system-startup">🚀 System Startup</h2>
 
-- Create a new directory named `core`.
+- Create a new directory named `monitor`.
 
 ```
-mkdir core
-cd core
+mkdir monitor
+cd monitor
 ```
 
 - Clone project.
 
 ```
-git clone https://github.com/ahmettoguz/core-prometheus
+git clone https://github.com/ahmettoguz/monitor-prometheus
 ```
 
 - Create configuration file `./config/prometheus.yml` with reference to one of the following file according to needs:
@@ -86,20 +86,20 @@ git clone https://github.com/ahmettoguz/core-prometheus
 cp ./config/prometheus.all.yml ./config/prometheus.yml
 ```
 
-- Create `network-core` network if not exists.
+- Create `network-monitor` network if not exists.
 
 ```
-docker network create network-core
+docker network create network-monitor
 ```
 
 - Run Container.
 
 ```
-docker stop                           core-prometheus-c
-docker rm                             core-prometheus-c
-docker compose -p core up --build -d  prometheus
-docker compose -p core up -d          prometheus
-docker logs -f                        core-prometheus-c
+docker stop                             monitor-prometheus-c
+docker rm                               monitor-prometheus-c
+docker compose -p monitor up --build -d prometheus
+docker compose -p monitor up -d         prometheus
+docker logs -f                          monitor-prometheus-c
 ```
 
 - Test connection.
@@ -109,7 +109,13 @@ curl -vkL https://micro-local.net/prometheus/api/v1/query?query=up
 curl -vkL https://micro-local.net/prometheus/api/v1/metadata
 ```
 
-- Check [`grafana`](https://github.com/ahmettoguz/core-graphana) repository to integrate gaphana to visualize prometheus data.
+- Refer to [`Node-Export`](https://github.com/ahmettoguz/monitor-node-export) repository to expose node metrics.
+
+- Refer to [`cAdvisor`](https://github.com/ahmettoguz/monitor-cadvisor) repository to expose contianer metrics.
+
+- Refer to [`Grafana`](https://github.com/ahmettoguz/monitor-grafana) repository to integrate grafana to visualize node exporter data.
+
+- Refer to [`Traefik`](https://github.com/ahmettoguz/core-traefik) repository to expose traefik metrics and also launch reverse proxy.
 
 <br/>
 
