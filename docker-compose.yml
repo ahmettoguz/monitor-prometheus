@@ -2,7 +2,7 @@
 services:
   prometheus:
     image: prom/prometheus
-    container_name: core-prometheus-c
+    container_name: monitor-prometheus-c
     volumes:
       - ./mount:/prometheus
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -11,12 +11,12 @@ services:
       - "--web.route-prefix=/prometheus"
       - "--web.external-url=https://prometheus/prometheus"
     networks:
-      - network-core
+      - network-monitor
     restart: always
     # ports:
     #   - 9090:9090
 
 ####################################### Networks
 networks:
-  network-core:
+  network-monitor:
     external: true
