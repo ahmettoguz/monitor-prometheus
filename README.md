@@ -22,7 +22,7 @@
 
 <h2 id="intro">📌 About Project</h2>
 
-This project simplifies the deployment of Prometheus with pre-configured settings, including persistent data storage and integration with Traefik metrics for monitoring reverse proxy performance, cAdvisor, and node-exporter to monitor both containerized and system-level performance, all managed via Docker Compose.
+This project simplifies the deployment of Prometheus with pre-configured settings, including persistent data storage and integration with Traefik, cAdvisor, and node-exporter to monitor reverse-proxy, docker and system performance and metrics, all managed via Docker Compose.
 
 <br/>
 
@@ -55,6 +55,8 @@ This project simplifies the deployment of Prometheus with pre-configured setting
 <br/>
 
 <h2 id="releases">🚢 Releases</h2>
+
+&nbsp; [![.](https://img.shields.io/badge/1.1.0-233838?style=flat&label=version&labelColor=111727&color=1181A1)](https://github.com/ahmettoguz/monitor-prometheus/tree/v1.1.0)
 
 &nbsp; [![.](https://img.shields.io/badge/1.0.0-233838?style=flat&label=version&labelColor=111727&color=1181A1)](https://github.com/ahmettoguz/monitor-prometheus/tree/v1.0.0)
 
@@ -110,18 +112,11 @@ docker compose -p monitor up -d         prometheus
 docker logs -f                          monitor-prometheus-c
 ```
 
-- Test connection.
-
-```
-curl -vkL https://micro-local.net/prometheus/api/v1/query?query=up
-curl -vkL https://micro-local.net/prometheus/api/v1/metadata
-```
-
-- Refer to [`Node-Export`](https://github.com/ahmettoguz/monitor-node-export) repository to expose node metrics.
-
 - Refer to [`cAdvisor`](https://github.com/ahmettoguz/monitor-cadvisor) repository to expose contianer metrics.
 
-- Refer to [`Grafana`](https://github.com/ahmettoguz/monitor-grafana) repository to integrate grafana to visualize node exporter data.
+- Refer to [`Node-Exporter`](https://github.com/ahmettoguz/monitor-node-exporter) repository to expose node metrics.
+
+- Refer to [`Grafana`](https://github.com/ahmettoguz/monitor-grafana) repository to integrate grafana to visualize metrics.
 
 - Refer to [`Traefik`](https://github.com/ahmettoguz/core-traefik) repository to expose traefik metrics and also launch reverse proxy.
 
