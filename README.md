@@ -40,6 +40,7 @@ cd monitor
 
 ```
 git clone https://github.com/ahmettoguz/monitor-prometheus
+cd monitor-prometheus
 ```
 
 - Create configuration file `./config/prometheus.yml` with reference to one of the following file according to needs:
@@ -53,13 +54,20 @@ git clone https://github.com/ahmettoguz/monitor-prometheus
 cp ./config/prometheus.all.yml ./config/prometheus.yml
 ```
 
+- Create `mount` directory and change file permissions.
+
+```
+mkdir mount
+chown -R 65534:65534 ./mount
+```
+
 - Create `network-monitor` network if not exists.
 
 ```
 docker network create network-monitor
 ```
 
-- Run Container.
+- Run container.
 
 ```
 docker stop                             monitor-prometheus-c
@@ -69,18 +77,11 @@ docker compose -p monitor up -d         prometheus
 docker logs -f                          monitor-prometheus-c
 ```
 
-- Test connection.
-
-```
-curl -vkL https://micro-local.net/prometheus/api/v1/query?query=up
-curl -vkL https://micro-local.net/prometheus/api/v1/metadata
-```
-
-- Refer to [`Node-Export`](https://github.com/ahmettoguz/monitor-node-export) repository to expose node metrics.
-
 - Refer to [`cAdvisor`](https://github.com/ahmettoguz/monitor-cadvisor) repository to expose contianer metrics.
 
-- Refer to [`Grafana`](https://github.com/ahmettoguz/monitor-grafana) repository to integrate grafana to visualize node exporter data.
+- Refer to [`Node-Exporter`](https://github.com/ahmettoguz/monitor-node-exporter) repository to expose node metrics.
+
+- Refer to [`Grafana`](https://github.com/ahmettoguz/monitor-grafana) repository to integrate grafana to visualize metrics.
 
 - Refer to [`Traefik`](https://github.com/ahmettoguz/core-traefik) repository to expose traefik metrics and also launch reverse proxy.
 
