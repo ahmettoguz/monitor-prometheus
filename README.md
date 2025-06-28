@@ -1,4 +1,4 @@
-<h1 id="top" align="center">Monitor Prometheus <br/> 🚢 v1.1.0 🚢</h1>
+<h1 id="top" align="center">Monitor Prometheus <br/> 🚢 v1.2.0 🚢</h1>
 
 <br>
 
@@ -18,9 +18,10 @@
 <h2 id="features">🔥 Features</h2>
 
 - **Docker Containerization:** The application is containerized using Docker to ensure consistent deployment, scalability, and isolation across different environments.
-- **Persistent Data:** Utilizes bind mounts to persist data on the host machine, preventing data loss during container restarts.
+- **Persistent Data:** Utilizes a named Docker volume to ensure persistent storage of application data, allowing data to persist across container restarts, rebuilds, and removals.
 - **Docker Compose Deployment:** Simplifies deployment with Docker Compose configuration, enabling easy setup and service orchestration without complex commands.
-- **Customizable Configuration:** Easily modify Prometheus configuration via bind mounts to adjust settings such as scrape intervals, alert rules, and more.
+- **Configuration:** Preconfigured Prometheus configuration to adjust scrape intervals, alert rules, and more.
+- **.env Configuration:** All environment variables are easily configurable using the `.env` file, simplifying configuration management.
 - **Traefik Metrics Integration:** Prometheus can be configured to scrape metrics provided by Traefik, enabling monitoring of your reverse proxy's performance, request counts, error rates, and other important statistics. This helps to get a comprehensive view of your application's traffic and routing.
 - **cAdvisor Integration:** Integrates with cAdvisor to scrape container metrics and track resource usage (CPU, memory, network, disk) across running containers.
 - **Node-Exporter Integration:** Scrapes node metrics, including system-level statistics like CPU usage, memory consumption, disk I/O, and network statistics for overall server health monitoring.
@@ -43,6 +44,12 @@ git clone https://github.com/ahmettoguz/monitor-prometheus
 cd monitor-prometheus
 ```
 
+- Create `.env` file based on the `.env.example` file with credentails and configurations.
+
+```
+cp .env.example .env
+```
+
 - Create configuration file `./config/prometheus.yml` with reference to one of the following file according to needs:
 
 - `./config/prometheus.all.yml`
@@ -51,14 +58,7 @@ cd monitor-prometheus
 - `./config/prometheus.traefik.yml`
 
 ```
-cp ./config/prometheus.all.yml ./config/prometheus.yml
-```
-
-- Create `mount` directory and change file permissions.
-
-```
-mkdir mount
-chown -R 65534:65534 ./mount
+cp ./config/prometheus.all.yml ./config/prometheus.ymldfg
 ```
 
 - Create `network-monitor` network if not exists.
@@ -67,14 +67,14 @@ chown -R 65534:65534 ./mount
 docker network create network-monitor
 ```
 
-- Run container.
+- Manage container.
 
 ```
-docker stop                             monitor-prometheus-c
-docker rm                               monitor-prometheus-c
-docker compose -p monitor up --build -d prometheus
-docker compose -p monitor up -d         prometheus
-docker logs -f                          monitor-prometheus-c
+docker stop                     container-prometheus
+docker rm                       container-prometheus
+docker volume rm                volume-prometheus
+docker compose -p monitor up -d service-prometheus
+docker logs -f                  container-prometheus
 ```
 
 - Refer to [`cAdvisor`](https://github.com/ahmettoguz/monitor-cadvisor) repository to expose contianer metrics.
@@ -85,7 +85,7 @@ docker logs -f                          monitor-prometheus-c
 
 - Refer to [`Loki`](https://github.com/ahmettoguz/monitor-loki) repository to scrap traefik access logs from promtail.
 
-- Refer to [`Traefik`](https://github.com/ahmettoguz/core-traefik) repository to expose traefik access logs, metrics and also launch reverse proxy.
+- Refer to [`Traefik`](https://github.com/ahmettoguz/proxy-traefik) repository to expose traefik access logs, metrics and also launch reverse proxy.
 
 - Refer to [`Grafana`](https://github.com/ahmettoguz/monitor-grafana) repository to integrate grafana to visualize logs and metrics.
 

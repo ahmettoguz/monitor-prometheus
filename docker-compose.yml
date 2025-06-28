@@ -1,18 +1,16 @@
 ####################################### Services
 services:
-  prometheus:
-    image: prom/prometheus
-    container_name: monitor-prometheus-c
+  service-prometheus:
+    image: ahmettoguz/prometheus:v3.2.1
+    container_name: container-prometheus
     volumes:
-      - ./mount:/prometheus
+      - volume-prometheus:/prometheus
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
-      - "--web.route-prefix=/prometheus"
-      - "--web.external-url=https://prometheus/prometheus"
     networks:
       - network-monitor
-    restart: always
+    restart: ${RESTART_POLICY}
     # ports:
     #   - 9090:9090
 
@@ -20,3 +18,8 @@ services:
 networks:
   network-monitor:
     external: true
+
+####################################### Volumes
+volumes:
+  volume-prometheus:
+    name: volume-prometheus
