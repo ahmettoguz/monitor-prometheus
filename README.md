@@ -44,10 +44,17 @@ git clone https://github.com/ahmettoguz/monitor-prometheus
 cd monitor-prometheus
 ```
 
+- Switch version.
+
+```
+git checkout v1.2.1
+```
+
 - Create `.env` file based on the `.env.example` file with credentails and configurations.
 
 ```
 cp .env.example .env
+nano .env
 ```
 
 - Create configuration file `./config/prometheus.yml` with reference to one of the following file according to needs:
@@ -58,7 +65,7 @@ cp .env.example .env
 - `./config/prometheus.traefik.yml`
 
 ```
-cp ./config/prometheus.all.yml ./config/prometheus.ymldfg
+cp ./config/prometheus.all.yml ./config/prometheus.yml
 ```
 
 - Create `network-monitor` network if not exists.
